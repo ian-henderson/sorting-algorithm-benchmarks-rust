@@ -242,6 +242,60 @@ pub fn selection_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
     vec
 }
 
+// https://en.wikipedia.org/wiki/Radix_sort
+pub fn radix_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
+    let max_value = get_max_value(vec);
+
+    // Do counting sort for every value. Note that instead of passing the
+    // value, exp is passed. Exp is 10^i where i is the current value.
+    let mut place: u128 = 1; // big number time!
+    while (max_value as u128) / place > 0 {
+        count_sort(vec, place as usize);
+        place *= 10;
+    }
+
+    vec
+}
+
+fn get_max_value(vec: &mut Vec<usize>) -> usize {
+    let mut max_value = vec[0];
+
+    for i in 1..vec.len() {
+        if vec[i] > max_value {
+            max_value = vec[i];
+        }
+    }
+
+    max_value
+}
+
+fn count_sort(vec: &mut Vec<usize>, place: usize) {
+    let mut output_vec = vec![0; vec.len()];
+    let mut count_vec = vec![0; 10];
+
+    // store count of occurences in count_vec
+    for i in 0..vec.len() {
+        count_vec[(vec[i] / place) % 10] += 1;
+    }
+
+    // change count[i] so that count[i] now contains actual position of this
+    // value in output_vec
+    for i in 1..count_vec.len() {
+        count_vec[i] += count_vec[i - 1];
+    }
+
+    for i in (0..output_vec.len()).rev() {
+        output_vec[count_vec[(vec[i] / place) % 10] - 1] = vec[i];
+        count_vec[(vec[i] / place) % 10] -= 1;
+    }
+
+    // copy output_vec to vec, so that vec now contains sorted numbers
+    // according to current digit
+    for i in 0..vec.len() {
+        vec[i] = output_vec[i];
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -272,12 +326,17 @@ mod tests {
     }
 
     #[test]
+    fn test_radix_sort() {
+        test_sorting_fn(radix_sort);
+    }
+
+    #[test]
     fn test_selection_sort() {
         test_sorting_fn(selection_sort);
     }
 
     fn test_sorting_fn(sort_fn: fn(&mut Vec<usize>) -> &Vec<usize>) {
-        let mut vec: Vec<usize> = vec![9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+        let mut vec: Vec<usize> = (0..100).rev().collect();
         sort_fn(&mut vec);
 
         for i in 0..(vec.len() - 1) {

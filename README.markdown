@@ -13,6 +13,7 @@ Set up rust and cargo by running the installation script [here](https://www.rust
 - Insertion Sort
 - Merge Sort
 - Quick Sort
+- Radix Sort
 - Selection Sort
 
 ## sample output:
@@ -21,34 +22,39 @@ Set up rust and cargo by running the installation script [here](https://www.rust
 Sorting Algorithm Benchmarks (list length: 66666)
 
 Bubble Sort
-        Average Case    6.728099895
-        Best Case       0.000199725
-        Worst Case      3.686846555
+        Average Case    5.649028088
+        Best Case       0.000348441
+        Worst Case      2.3756466019999998
 
 Heap Sort
-        Average Case    0.011889215
-        Best Case       0.000224784
-        Worst Case      0.009526588
+        Average Case    0.010744392
+        Best Case       0.000479743
+        Worst Case      0.008833129
 
 Insertion Sort
-        Average Case    0.535928447
-        Best Case       0.000188315
-        Worst Case      1.114860071
+        Average Case    0.475855201
+        Best Case       0.000186461
+        Worst Case      1.010570874
 
 Merge Sort
-        Average Case    0.026658533
-        Best Case       0.000139282
-        Worst Case      0.021818274
+        Average Case    0.022103039
+        Best Case       0.000167711
+        Worst Case      0.017434174
 
 Quick Sort
-        Average Case    0.008514629
-        Best Case       0.00012705
-        Worst Case      0.002264807
+        Average Case    0.006535983
+        Best Case       0.000129839
+        Worst Case      0.001882602
+
+Radix Sort
+        Average Case    0.049363798
+        Best Case       0.00934979
+        Worst Case      0.006938483
 
 Selection Sort
-        Average Case    2.547715437
-        Best Case       0.000166546
-        Worst Case      2.253252412
+        Average Case    2.469629011
+        Best Case       0.000294187
+        Worst Case      2.157265563
 
-Benchmarks ran asynchronously in 6.730001506 seconds!
+Benchmarks ran asynchronously in 5.650625458 seconds!
 ```

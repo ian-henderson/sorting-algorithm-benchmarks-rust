@@ -1,5 +1,5 @@
 use crate::sorting::{
-    bubble_sort, heap_sort, insertion_sort, merge_sort, quick_sort, selection_sort,
+    bubble_sort, heap_sort, insertion_sort, merge_sort, quick_sort, radix_sort, selection_sort,
 };
 use crate::utils::{
     create_test_vecs, get_array_size, print_test_result, run_test, TestConfig, TestResult,
@@ -40,6 +40,10 @@ fn main() {
         TestConfig {
             name: "Quick Sort".to_string(),
             sort_fn: quick_sort,
+        },
+        TestConfig {
+            name: "Radix Sort".to_string(),
+            sort_fn: radix_sort,
         },
         TestConfig {
             name: "Selection Sort".to_string(),

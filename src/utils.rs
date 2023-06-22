@@ -98,7 +98,5 @@ pub fn print_test_result(
 pub fn run_test(config: TestConfig, vec: &mut Vec<usize>) -> Duration {
     let start = Instant::now();
     (config.sort_fn)(vec);
-    let end = Instant::now() - start;
-
-    end
+    Instant::now() - start
 }
