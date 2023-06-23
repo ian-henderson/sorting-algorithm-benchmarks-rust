@@ -244,10 +244,13 @@ pub fn selection_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
 
 // https://en.wikipedia.org/wiki/Radix_sort
 pub fn radix_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
-    let max_value = get_max_value(vec);
+    if is_best_case_vec(vec) {
+        return vec;
+    }
 
     // Do counting sort for every value. Note that instead of passing the
-    // value, exp is passed. Exp is 10^i where i is the current value.
+    // value, place is passed. Place is 10^i where i is the current value.
+    let max_value = get_max_value(vec);
     let mut place: u128 = 1; // big number time!
     while (max_value as u128) / place > 0 {
         count_sort(vec, place as usize);
