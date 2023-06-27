@@ -18,6 +18,8 @@ Set up rust and cargo by running the installation script [here](https://www.rust
 
 ## sample output:
 
+### command: `cargo r -r 100000`
+
 ```
 Sorting Algorithm Benchmarks (list length: 100000)
 
