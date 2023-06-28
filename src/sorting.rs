@@ -219,60 +219,6 @@ fn partition(vec: &mut Vec<usize>, low: usize, high: usize) -> usize {
     }
 }
 
-// https://en.wikipedia.org/wiki/Selection_sort
-pub fn selection_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
-    if is_best_case_vec(vec) {
-        return vec;
-    }
-
-    for i in 0..(vec.len() - 1) {
-        let mut smallest_index = i;
-
-        for j in (i + 1)..vec.len() {
-            if vec[j] < vec[smallest_index] {
-                smallest_index = j;
-            }
-        }
-
-        if i != smallest_index {
-            vec.swap(i, smallest_index);
-        }
-    }
-
-    vec
-}
-
-// https://en.wikipedia.org/wiki/Shellsort
-pub fn shell_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
-    let mut gap: isize = (vec.len() as isize) / 2;
-
-    while gap > 0 {
-        // Do a gapped insertion sort for this gap size.
-        // The first gap elements vec[0..(gap - 1)] are already in gapped order
-        // keep adding one more element until the array is gap sorted.
-        for i in (gap as usize)..vec.len() {
-            // Add vec[i] to the elements that have been gap sorted.
-            // Save vec[i] in temp and make a hole at position i.
-            let temp = vec[i];
-
-            // Shift earlier gap-sorted elements up until the correct location
-            // for vec[i] is found
-            let mut j = i;
-            while j >= (gap as usize) && vec[j - (gap as usize)] > temp {
-                vec[j] = vec[j - (gap as usize)];
-                j -= gap as usize;
-            }
-
-            // Put temp (the original vec[i]) in its original location
-            vec[j] = temp;
-        }
-
-        gap /= 2;
-    }
-
-    vec
-}
-
 // https://en.wikipedia.org/wiki/Radix_sort
 pub fn radix_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
     if is_best_case_vec(vec) {
@@ -328,6 +274,64 @@ fn count_sort(vec: &mut Vec<usize>, place: usize) {
     for i in 0..vec.len() {
         vec[i] = output_vec[i];
     }
+}
+
+// https://en.wikipedia.org/wiki/Selection_sort
+pub fn selection_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
+    if is_best_case_vec(vec) {
+        return vec;
+    }
+
+    for i in 0..(vec.len() - 1) {
+        let mut smallest_index = i;
+
+        for j in (i + 1)..vec.len() {
+            if vec[j] < vec[smallest_index] {
+                smallest_index = j;
+            }
+        }
+
+        if i != smallest_index {
+            vec.swap(i, smallest_index);
+        }
+    }
+
+    vec
+}
+
+// https://en.wikipedia.org/wiki/Shellsort
+pub fn shell_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
+    if is_best_case_vec(vec) {
+        return vec;
+    }
+
+    let mut gap: isize = (vec.len() as isize) / 2;
+
+    while gap > 0 {
+        // Do a gapped insertion sort for this gap size.
+        // The first gap elements vec[0..(gap - 1)] are already in gapped order
+        // keep adding one more element until the array is gap sorted.
+        for i in (gap as usize)..vec.len() {
+            // Add vec[i] to the elements that have been gap sorted.
+            // Save vec[i] in temp and make a hole at position i.
+            let temp = vec[i];
+
+            // Shift earlier gap-sorted elements up until the correct location
+            // for vec[i] is found
+            let mut j = i;
+            while j >= (gap as usize) && vec[j - (gap as usize)] > temp {
+                vec[j] = vec[j - (gap as usize)];
+                j -= gap as usize;
+            }
+
+            // Put temp (the original vec[i]) in its original location
+            vec[j] = temp;
+        }
+
+        gap /= 2;
+    }
+
+    vec
 }
 
 #[cfg(test)]
