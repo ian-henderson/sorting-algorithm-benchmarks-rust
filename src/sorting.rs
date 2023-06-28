@@ -18,6 +18,22 @@ pub fn bubble_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
     vec
 }
 
+// https://en.wikipedia.org/wiki/Gnome_sort
+pub fn gnome_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
+    let mut i = 0;
+
+    while i < vec.len() {
+        if i == 0 || vec[i] >= vec[i - 1] {
+            i += 1;
+        } else {
+            vec.swap(i, i - 1);
+            i -= 1;
+        }
+    }
+
+    vec
+}
+
 // https://en.wikipedia.org/wiki/Heapsort
 pub fn heap_sort(vec: &mut Vec<usize>) -> &Vec<usize> {
     if is_best_case_vec(vec) {
@@ -341,6 +357,11 @@ mod tests {
     #[test]
     fn test_bubble_sort() {
         test_sorting_fn(bubble_sort);
+    }
+
+    #[test]
+    fn test_gnome_sort() {
+        test_sorting_fn(gnome_sort);
     }
 
     #[test]

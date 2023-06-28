@@ -1,6 +1,6 @@
 use crate::sorting::{
-    bubble_sort, heap_sort, insertion_sort, merge_sort, quick_sort, radix_sort, selection_sort,
-    shell_sort,
+    bubble_sort, gnome_sort, heap_sort, insertion_sort, merge_sort, quick_sort, radix_sort,
+    selection_sort, shell_sort,
 };
 use crate::utils::{
     create_test_vecs, get_array_size, print_test_result, run_test, TestConfig, TestResult,
@@ -25,6 +25,10 @@ fn main() {
         TestConfig {
             name: "Bubble Sort".to_string(),
             sort_fn: bubble_sort,
+        },
+        TestConfig {
+            name: "Gnome Sort".to_string(),
+            sort_fn: gnome_sort,
         },
         TestConfig {
             name: "Heap Sort".to_string(),
@@ -80,26 +84,19 @@ fn main() {
                 }),
             }
         })
-        .map(
-            |TestResultHandles {
-                 name,
-                 average_case_duration_handle,
-                 best_case_duration_handle,
-                 worst_case_duration_handle,
-             }| TestResult {
-                name,
-                average_case_duration: average_case_duration_handle.join(),
-                best_case_duration: best_case_duration_handle.join(),
-                worst_case_duration: worst_case_duration_handle.join(),
-            },
-        );
+        .map(|test_result_handles| TestResult {
+            name: test_result_handles.name,
+            average_case_duration: test_result_handles.average_case_duration_handle.join(),
+            best_case_duration: test_result_handles.best_case_duration_handle.join(),
+            worst_case_duration: test_result_handles.worst_case_duration_handle.join(),
+        });
 
     let benchmark_duration = timer.stop();
 
     test_results.into_iter().for_each(print_test_result);
 
     println!(
-        "Benchmarks ran asynchronously in {} seconds!",
+        "Benchmarks ran parallelly in {} seconds!",
         benchmark_duration.as_secs_f64()
     );
 }

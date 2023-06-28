@@ -9,6 +9,7 @@ Set up rust and cargo by running the installation script [here](https://www.rust
 
 ## sorting algorithms
 - Bubble Sort
+- Gnome Sort
 - Heap Sort
 - Insertion Sort
 - Merge Sort
@@ -24,45 +25,41 @@ Set up rust and cargo by running the installation script [here](https://www.rust
 ```
 Sorting Algorithm Benchmarks (list length: 100000)
 
-Bubble Sort
-        Average Case    12.487627137
-        Best Case       0.000222747
-        Worst Case      5.066368709
+Bubble Sort     Average Case:   12.322887609 seconds
+                Best Case:      0.000118932 seconds
+                Worst Case:     6.494159823 seconds
 
-Heap Sort
-        Average Case    0.018291214
-        Best Case       0.000252006
-        Worst Case      0.01063478
+Gnome Sort      Average Case:   7.042260819 seconds
+                Best Case:      0.000407938 seconds
+                Worst Case:     12.716790014 seconds
 
-Insertion Sort
-        Average Case    1.125501204
-        Best Case       0.000234803
-        Worst Case      2.197871822
+Heap Sort       Average Case:   0.019971534 seconds
+                Best Case:      0.000650108 seconds
+                Worst Case:     0.012878383 seconds
 
-Merge Sort
-        Average Case    0.031143804
-        Best Case       0.00024912
-        Worst Case      0.02351766
+Insertion Sort  Average Case:   1.350668601 seconds
+                Best Case:      0.0002065 seconds
+                Worst Case:     3.377137406 seconds
 
-Quick Sort
-        Average Case    0.009799731
-        Best Case       0.000216063
-        Worst Case      0.002679227
+Merge Sort      Average Case:   0.04051903 seconds
+                Best Case:      0.000334179 seconds
+                Worst Case:     0.033061395 seconds
 
-Radix Sort
-        Average Case    0.077469944
-        Best Case       0.000220508
-        Worst Case      0.012302892
+Quick Sort      Average Case:   0.017470633 seconds
+                Best Case:      0.000414442 seconds
+                Worst Case:     0.002368494 seconds
 
-Selection Sort
-        Average Case    5.325710678
-        Best Case       0.000707082
-        Worst Case      4.73135191
+Radix Sort      Average Case:   0.071867771 seconds
+                Best Case:      0.000738941 seconds
+                Worst Case:     0.010871847 seconds
 
-Shell Sort
-        Average Case    0.016538554
-        Best Case       0.000295325
-        Worst Case      0.013123315
+Selection Sort  Average Case:   6.009173841 seconds
+                Best Case:      0.000180396 seconds
+                Worst Case:     4.557693024 seconds
 
-Benchmarks ran asynchronously in 12.489135133 seconds!
+Shell Sort      Average Case:   0.020189003 seconds
+                Best Case:      0.00017407 seconds
+                Worst Case:     0.005070876 seconds
+
+Benchmarks ran parallelly in 12.721030739 seconds!
 ```

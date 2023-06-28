@@ -64,6 +64,13 @@ pub fn get_array_size() -> usize {
     }
 }
 
+fn print_duration(result_duration: Result<Duration>) {
+    match result_duration {
+        Ok(duration) => print!("{} seconds", duration.as_secs_f64()),
+        Err(error) => eprint!("{:?}", error),
+    };
+}
+
 pub fn print_test_result(
     TestResult {
         name,
@@ -72,25 +79,17 @@ pub fn print_test_result(
         worst_case_duration,
     }: TestResult,
 ) {
-    println!("{}", name);
+    print!("{}\tAverage Case:\t", name);
+    print_duration(average_case_duration);
+    println!();
 
-    print!("\tAverage Case\t");
-    match average_case_duration {
-        Ok(duration) => println!("{}", duration.as_secs_f64()),
-        Err(error) => eprintln!("{:?}", error),
-    };
+    print!("\t\tBest Case:\t");
+    print_duration(best_case_duration);
+    println!();
 
-    print!("\tBest Case\t");
-    match best_case_duration {
-        Ok(duration) => println!("{}", duration.as_secs_f64()),
-        Err(error) => eprintln!("{:?}", error),
-    };
-
-    print!("\tWorst Case\t");
-    match worst_case_duration {
-        Ok(duration) => println!("{}", duration.as_secs_f64()),
-        Err(error) => eprintln!("{:?}", error),
-    };
+    print!("\t\tWorst Case:\t");
+    print_duration(worst_case_duration);
+    println!();
 
     println!();
 }
